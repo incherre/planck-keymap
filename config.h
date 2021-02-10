@@ -11,7 +11,7 @@
 #define UNICODE_SELECTED_MODES UC_MAC, UC_LNX
 
 // https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#permissive-hold
-#define PERMISSIVE_HOLD
+// #define PERMISSIVE_HOLD
 
 // Threshold in milliseconds to interpret tap rather than hold
-#define TAPPING_TERM 200
+// #define TAPPING_TERM 200

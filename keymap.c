@@ -89,24 +89,24 @@ const uint32_t PROGMEM unicode_map[] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_BASE] = LAYOUT_ortho_4x12(
-    KC_TAB,      KC_Q,      KC_W,    KC_E,            KC_R,   KC_T,  KC_Y,  KC_U,           KC_I,           KC_O,    KC_P,    KC_BSPC,
-    KC_ESC,      KC_A,      KC_S,    KC_D,            KC_F,   KC_G,  KC_H,  KC_J,           KC_K,           KC_L,    KC_SCLN, QUOTE,
-    KC_LEFT,     KC_Z,      KC_X,    KC_C,            KC_V,   KC_B,  KC_N,  KC_M,           KC_COMM,        KC_DOT,  KC_SLSH, KC_RGHT,
-    KC__VOLDOWN, KC__VOLUP, KC_LGUI, LALT_T(KC_BSPC), KC_ENT, LOWER, RAISE, RSFT_T(KC_SPC), RCTL_T(KC_DEL), KC_SLEP, KC_BRID, KC_BRIU
+    KC_TAB,      KC_Q,      KC_W,    KC_E,            KC_R,    KC_T,  KC_Y,  KC_U,   KC_I,           KC_O,    KC_P,    KC_BSPC,
+    KC_ESC,      KC_A,      KC_S,    KC_D,            KC_F,    KC_G,  KC_H,  KC_J,   KC_K,           KC_L,    KC_SCLN, QUOTE,
+    KC_LEFT,     KC_Z,      KC_X,    KC_C,            KC_V,    KC_B,  KC_N,  KC_M,   KC_COMM,        KC_DOT,  KC_SLSH, KC_RGHT,
+    KC__VOLDOWN, KC__VOLUP, KC_LGUI, LALT_T(KC_BSPC), KC_LSFT, LOWER, RAISE, KC_SPC, RCTL_T(KC_DEL), KC_SLEP, KC_BRID, KC_BRIU
 ),
 
 [_LOWER] = LAYOUT_ortho_4x12(
-    KC_F1, X(QSTN), X(WINK), X(EYES),         X(RLVD), X(TNGE), X(YEN),  X(UPDN),        X(IMP),         X(OH),  X(PRTY), KC_F12,
-    KC_F2, X(AGRY), X(SPKL), X(DSPT),         X(FIRE), X(GRIN), X(HRT),  X(JANK),        X(KISS),        X(LGH), X(POOP), KC_F11,
-    KC_F3, X(ZZZ),  X(XMRK), X(COOL),         X(VMIT), X(BANA), X(NOSE), X(MNKY),        X(DOWN),        X(UP),  X(CHK),  KC_F10,
-    KC_F4, KC_F5,   KC_F6,   LALT_T(KC_BSPC), KC_ENT,  XXXXXXX, KC_RSFT, RSFT_T(KC_SPC), RCTL_T(KC_DEL), KC_F7,  KC_F8,   KC_F9
+    KC_F1, X(QSTN), X(WINK), X(EYES),         X(RLVD), X(TNGE), X(YEN),  X(UPDN), X(IMP),         X(OH),  X(PRTY), KC_F12,
+    KC_F2, X(AGRY), X(SPKL), X(DSPT),         X(FIRE), X(GRIN), X(HRT),  X(JANK), X(KISS),        X(LGH), X(POOP), KC_F11,
+    KC_F3, X(ZZZ),  X(XMRK), X(COOL),         X(VMIT), X(BANA), X(NOSE), X(MNKY), X(DOWN),        X(UP),  X(CHK),  KC_F10,
+    KC_F4, KC_F5,   KC_F6,   LALT_T(KC_BSPC), KC_ENT,  XXXXXXX, KC_RSFT, KC_SPC,  RCTL_T(KC_DEL), KC_F7,  KC_F8,   KC_F9
 ),
 
 [_RAISE] = LAYOUT_ortho_4x12(
-    KC_TAB,  KC_GRAVE, KC_LCBR, KC_LPRN,         KC_LBRC, KC_LABK, KC_RABK, KC_RBRC,        KC_RPRN,        KC_RCBR, KC_BSLS, KC_BSPC,
-    KC_ESC,  KC_1,     KC_2,    KC_3,            KC_4,    KC_5,    KC_6,    KC_7,           KC_8,           NINE,    ZERO,    SIGN,
-    KC_LEFT, KC_HOME,  KC_PGDN, KC_PGUP,         KC_END,  UC_M_MA, UC_M_LN, KC_LEFT,        KC_DOWN,        KC_UP,   KC_RGHT, KC_RGHT,
-    KC_VOLD, KC_VOLU,  KC_LGUI, LALT_T(KC_BSPC), KC_ENT,  KC_LSFT, XXXXXXX, RSFT_T(KC_SPC), RCTL_T(KC_DEL), DM_RSTP, DM_REC1, DM_PLY1
+    KC_TAB,  KC_GRAVE, KC_LCBR, KC_LPRN,         KC_LBRC, KC_LABK, KC_RABK, KC_RBRC, KC_RPRN,        KC_RCBR, KC_BSLS, KC_BSPC,
+    KC_ESC,  KC_1,     KC_2,    KC_3,            KC_4,    KC_5,    KC_6,    KC_7,    KC_8,           NINE,    ZERO,    SIGN,
+    KC_LEFT, KC_HOME,  KC_PGDN, KC_PGUP,         KC_END,  UC_M_MA, UC_M_LN, KC_LEFT, KC_DOWN,        KC_UP,   KC_RGHT, KC_RGHT,
+    KC_VOLD, KC_VOLU,  KC_LGUI, LALT_T(KC_BSPC), KC_ENT,  KC_LSFT, XXXXXXX, KC_SPC,  RCTL_T(KC_DEL), DM_RSTP, DM_REC1, DM_PLY1
 )
 
 };
