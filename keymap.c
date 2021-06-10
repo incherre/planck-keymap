@@ -138,13 +138,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case NINE: ;
         custom_keycode = KC_9;
         if (mod_state & MOD_MASK_SHIFT) {
-            custom_keycode = KC_UNDERSCORE;
-        }
-
-        if (record->event.pressed) {
-            register_code16(custom_keycode);
+            if (record->event.pressed) {
+                tap_code(KC_UNDERSCORE);
+            }
         } else {
-            unregister_code16(custom_keycode);
+            if (record->event.pressed) {
+                register_code16(custom_keycode);
+            } else {
+                unregister_code16(custom_keycode);
+            }
         }
         return false;
     case ZERO: ;
@@ -165,13 +167,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case SIGN: ;
         custom_keycode = KC_MINUS;
         if (mod_state & MOD_MASK_SHIFT) {
-            custom_keycode = KC_PLUS;
-        }
-
-        if (record->event.pressed) {
-            register_code16(custom_keycode);
+            tap_code(KC_UNDERSCORE);
         } else {
-            unregister_code16(custom_keycode);
+            if (record->event.pressed) {
+                register_code16(custom_keycode);
+            } else {
+                unregister_code16(custom_keycode);
+            }
         }
         return false;
     }
