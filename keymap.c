@@ -139,7 +139,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         custom_keycode = KC_9;
         if (mod_state & MOD_MASK_SHIFT) {
             if (record->event.pressed) {
-                tap_code(KC_UNDERSCORE);
+                tap_code(KC_MINUS);  // KC_UNDERSCORE
             }
         } else {
             if (record->event.pressed) {
@@ -167,7 +167,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case SIGN: ;
         custom_keycode = KC_MINUS;
         if (mod_state & MOD_MASK_SHIFT) {
-            tap_code(KC_UNDERSCORE);
+            if (record->event.pressed) {
+                tap_code(KC_EQUAL);  // KC_PLUS
+            }
         } else {
             if (record->event.pressed) {
                 register_code16(custom_keycode);
