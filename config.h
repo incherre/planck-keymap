@@ -5,7 +5,7 @@
     // #define STARTUP_SONG SONG(NO_SOUND)
 #endif
 
-#define UNICODE_SELECTED_MODES UC_MAC, UC_LNX
+#define UNICODE_SELECTED_MODES UC_LNX
 
 // https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#permissive-hold
 // #define PERMISSIVE_HOLD
