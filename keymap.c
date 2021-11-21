@@ -121,6 +121,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case QUOTE: ;
+        custom_keycode = KC_DOUBLE_QUOTE;
         if (mod_state & MOD_MASK_SHIFT) {
             if (record->event.pressed) {
                 set_mods(mod_state & ~MOD_MASK_SHIFT);
@@ -129,9 +130,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
         } else {
             if (record->event.pressed) {
-                register_code16(KC_DOUBLE_QUOTE);
+                register_code16(custom_keycode);
             } else {
-                unregister_code16(KC_DOUBLE_QUOTE);
+                unregister_code16(custom_keycode);
             }
         }
         return false;
@@ -150,6 +151,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
     case ZERO: ;
+        custom_keycode = KC_0;
         if (mod_state & MOD_MASK_SHIFT) {
             if (record->event.pressed) {
                 set_mods(mod_state & ~MOD_MASK_SHIFT);
@@ -158,9 +160,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
         } else {
             if (record->event.pressed) {
-                register_code16(KC_0);
+                register_code16(custom_keycode);
             } else {
-                unregister_code16(KC_0);
+                unregister_code16(custom_keycode);
             }
         }
         return false;
