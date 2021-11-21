@@ -183,3 +183,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
 }
+
+#ifdef DYNAMIC_MACRO_ENABLE
+void dynamic_macro_record_start_user(void) {
+#ifdef AUDIO_ENABLE
+  PLAY_SONG(STARTUP_SOUND);
+#endif
+}
+
+void dynamic_macro_record_end_user(int8_t direction) {
+#ifdef AUDIO_ENABLE
+  PLAY_SONG(GOODBYE_SOUND);
+#endif
+}
+
+void dynamic_macro_play_user(int8_t direction) {
+#ifdef AUDIO_ENABLE
+  PLAY_SONG(MAJOR_SOUND);
+#endif
+}
+#endif
