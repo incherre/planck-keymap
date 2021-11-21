@@ -188,7 +188,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 float start_song[][2] = SONG(STARTUP_SOUND);
 float end_song[][2] = SONG(GOODBYE_SOUND);
-float play_song[][2] = SONG(MAJOR_SOUND);
+// float play_song[][2] = SONG(MAJOR_SOUND);
 
 void dynamic_macro_record_start_user(void) {
 #ifdef AUDIO_ENABLE
@@ -202,10 +202,10 @@ void dynamic_macro_record_end_user(int8_t direction) {
 #endif
 }
 
-void dynamic_macro_play_user(int8_t direction) {
-#ifdef AUDIO_ENABLE
-  PLAY_SONG(play_song);
-#endif
-}
+// void dynamic_macro_play_user(int8_t direction) {
+// #ifdef AUDIO_ENABLE
+//   PLAY_SONG(play_song);
+// #endif
+// }
 
 #endif
