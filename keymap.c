@@ -108,18 +108,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LEFT, KC_HOME,  KC_PGDN, KC_PGUP,         KC_END,  AU_OFF,  AU_ON,   KC_LEFT, KC_DOWN,        KC_UP,   KC_RGHT, KC_RGHT,
     KC_VOLD, KC_VOLU,  KC_LGUI, LALT_T(KC_BSPC), KC_LSFT, KC_ENT,  XXXXXXX, KC_SPC,  RCTL_T(KC_DEL), KC_BRID, KC_BRIU, KC_SLEP
 )
-
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     const uint8_t mod_state = get_mods();
     uint16_t custom_keycode;
     switch (keycode) {
-    case QWERTY:
-        if (record->event.pressed) {
-            set_single_persistent_default_layer(_BASE);
-        }
-        return false;
     case QUOTE: ;
         custom_keycode = KC_DOUBLE_QUOTE;
         if (mod_state & MOD_MASK_SHIFT) {
@@ -188,7 +182,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 float start_song[][2] = SONG(STARTUP_SOUND);
 float end_song[][2] = SONG(GOODBYE_SOUND);
-// float play_song[][2] = SONG(MAJOR_SOUND);
+float play_song[][2] = SONG(VIOLIN_SOUND);
 
 void dynamic_macro_record_start_user(void) {
 #ifdef AUDIO_ENABLE
@@ -202,10 +196,10 @@ void dynamic_macro_record_end_user(int8_t direction) {
 #endif
 }
 
-// void dynamic_macro_play_user(int8_t direction) {
-// #ifdef AUDIO_ENABLE
-//   PLAY_SONG(play_song);
-// #endif
-// }
+void dynamic_macro_play_user(int8_t direction) {
+#ifdef AUDIO_ENABLE
+  PLAY_SONG(play_song);
+#endif
+}
 
 #endif
