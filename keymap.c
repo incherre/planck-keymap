@@ -1,105 +1,30 @@
 #include QMK_KEYBOARD_H
 
+#include "keymap_steno.h"
+
 enum layers {
-  _BASE,
-  _LOWER,
-  _RAISE
+    _BASE,
+    _RAISE,
+    _PLOVER
 };
 
 enum custom_keycodes {
     QWERTY = SAFE_RANGE,
+    PLOVER,
+    EXT_PLV,
     QUOTE,
     NINE,
     ZERO,
     SIGN
 };
-
-enum unicode_names {
-    QSTN,
-    WINK,
-    EYES,
-    RLVD,
-    TNGE,
-    YEN,
-    UPDN,
-    IMP,
-    OH,
-    PRTY,
-
-    AGRY,
-    SPKL,
-    DSPT,
-    FIRE,
-    GRIN,
-    HRT,
-    JANK,
-    KISS,
-    LGH,
-    POOP,
-
-    ZZZ,
-    XMRK,
-    COOL,
-    VMIT,
-    BANA,
-    NOSE,
-    MNKY,
-    DOWN,
-    UP,
-    CHK
-};
-
-const uint32_t PROGMEM unicode_map[] = {
-    [QSTN] = 0x1F914,
-    [WINK] = 0x1F609,
-    [EYES] = 0x1F440,
-    [RLVD] = 0x1F60C,
-    [TNGE] = 0x1F61B,
-    [YEN] = 0x1F4B4,
-    [UPDN] = 0x1F643,
-    [IMP] = 0x1F608,
-    [OH] = 0x1F62E,
-    [PRTY] = 0x1F973,
-
-    [AGRY] = 0x1F621,
-    [SPKL] = 0x2728,
-    [DSPT] = 0x1F625,
-    [FIRE] = 0x1F525,
-    [GRIN] = 0x1F600,
-    [HRT] = 0x2764,
-    [JANK] = 0x1F615,
-    [KISS] = 0x1F618,
-    [LGH] = 0x1F923,
-    [POOP] = 0x1F4A9,
-
-    [ZZZ] = 0x1F634,
-    [XMRK] = 0x274C,
-    [COOL] = 0x1F60E,
-    [VMIT] = 0x1F92E,
-    [BANA] = 0x1F34C,
-    [NOSE] = 0x1F443,
-    [MNKY] = 0x1F648,
-    [DOWN] = 0x1F44E,
-    [UP] = 0x1F44D,
-    [CHK] = 0x2705
-};
-
-#define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_BASE] = LAYOUT_ortho_4x12(
-    KC_TAB,  KC_Q,    KC_W,    KC_E,            KC_R,    KC_T,  KC_Y,  KC_U,   KC_I,           KC_O,    KC_P,    KC_BSPC,
-    KC_ESC,  KC_A,    KC_S,    KC_D,            KC_F,    KC_G,  KC_H,  KC_J,   KC_K,           KC_L,    KC_SCLN, QUOTE,
-    KC_LEFT, KC_Z,    KC_X,    KC_C,            KC_V,    KC_B,  KC_N,  KC_M,   KC_COMM,        KC_DOT,  KC_SLSH, KC_RGHT,
-    DM_REC1, DM_PLY1, KC_LGUI, LALT_T(KC_BSPC), KC_LSFT, LOWER, RAISE, KC_SPC, RCTL_T(KC_DEL), DM_REC2, DM_PLY2, DM_RSTP
-),
-
-[_LOWER] = LAYOUT_ortho_4x12(
-    KC_F1, X(QSTN), X(WINK), X(EYES),         X(RLVD), X(TNGE), X(YEN),  X(UPDN), X(IMP),         X(OH),  X(PRTY), KC_F12,
-    KC_F2, X(AGRY), X(SPKL), X(DSPT),         X(FIRE), X(GRIN), X(HRT),  X(JANK), X(KISS),        X(LGH), X(POOP), KC_F11,
-    KC_F3, X(ZZZ),  X(XMRK), X(COOL),         X(VMIT), X(BANA), X(NOSE), X(MNKY), X(DOWN),        X(UP),  X(CHK),  KC_F10,
-    KC_F4, KC_F5,   KC_F6,   LALT_T(KC_BSPC), KC_LSFT, XXXXXXX, KC_ENT,  KC_SPC,  RCTL_T(KC_DEL), KC_F7,  KC_F8,   KC_F9
+    KC_TAB,  KC_Q,    KC_W,    KC_E,            KC_R,    KC_T,   KC_Y,  KC_U,   KC_I,           KC_O,    KC_P,    KC_BSPC,
+    KC_ESC,  KC_A,    KC_S,    KC_D,            KC_F,    KC_G,   KC_H,  KC_J,   KC_K,           KC_L,    KC_SCLN, QUOTE,
+    KC_LEFT, KC_Z,    KC_X,    KC_C,            KC_V,    KC_B,   KC_N,  KC_M,   KC_COMM,        KC_DOT,  KC_SLSH, KC_RGHT,
+    DM_REC1, DM_PLY1, KC_LGUI, LALT_T(KC_BSPC), KC_LSFT, PLOVER, RAISE, KC_SPC, RCTL_T(KC_DEL), DM_REC2, DM_PLY2, DM_RSTP
 ),
 
 [_RAISE] = LAYOUT_ortho_4x12(
@@ -107,13 +32,44 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_ESC,  KC_1,     KC_2,    KC_3,            KC_4,    KC_5,    KC_6,    KC_7,    KC_8,           NINE,    ZERO,    SIGN,
     KC_LEFT, KC_HOME,  KC_PGDN, KC_PGUP,         KC_END,  AU_OFF,  AU_ON,   KC_LEFT, KC_DOWN,        KC_UP,   KC_RGHT, KC_RGHT,
     KC_VOLD, KC_VOLU,  KC_LGUI, LALT_T(KC_BSPC), KC_LSFT, KC_ENT,  XXXXXXX, KC_SPC,  RCTL_T(KC_DEL), KC_BRID, KC_BRIU, KC_SLEP
+),
+
+
+[_PLOVER] = LAYOUT_planck_grid(
+    STN_N1,  STN_N2,  STN_N3,  STN_N4,  STN_N5,  STN_N6,  STN_N7,  STN_N8,  STN_N9,  STN_NA,  STN_NB,  STN_NC ,
+    STN_FN,  STN_S1,  STN_TL,  STN_PL,  STN_HL,  STN_ST1, STN_ST3, STN_FR,  STN_PR,  STN_LR,  STN_TR,  STN_DR ,
+    XXXXXXX, STN_S2,  STN_KL,  STN_WL,  STN_RL,  STN_ST2, STN_ST4, STN_RR,  STN_BR,  STN_GR,  STN_SR,  STN_ZR ,
+    EXT_PLV, XXXXXXX, XXXXXXX, STN_A,   STN_O,   XXXXXXX, XXXXXXX, STN_E,   STN_U,   STN_PWR, STN_RE1, STN_RE2
 )
+
 };
+
+#ifdef AUDIO_ENABLE
+    float plover_song[][2]     = SONG(PLOVER_SOUND);
+    float plover_gb_song[][2]  = SONG(PLOVER_GOODBYE_SOUND);
+#endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     const uint8_t mod_state = get_mods();
     uint16_t custom_keycode;
     switch (keycode) {
+    case PLOVER: ;
+        if (!record->event.pressed) {
+            #ifdef AUDIO_ENABLE
+                stop_all_notes();
+                PLAY_SONG(plover_song);
+            #endif
+            layer_on(_PLOVER);
+        }
+        return false;
+    case EXT_PLV: ;
+        if (record->event.pressed) {
+            #ifdef AUDIO_ENABLE
+                PLAY_SONG(plover_gb_song);
+            #endif
+            layer_off(_PLOVER);
+        }
+        return false;
     case QUOTE: ;
         custom_keycode = KC_DOUBLE_QUOTE;
         if (mod_state & MOD_MASK_SHIFT) {
@@ -186,19 +142,19 @@ float play_song[][2] = SONG(VIOLIN_SOUND);
 
 void dynamic_macro_record_start_user(void) {
 #ifdef AUDIO_ENABLE
-  PLAY_SONG(start_song);
+    PLAY_SONG(start_song);
 #endif
 }
 
 void dynamic_macro_record_end_user(int8_t direction) {
 #ifdef AUDIO_ENABLE
-  PLAY_SONG(end_song);
+    PLAY_SONG(end_song);
 #endif
 }
 
 void dynamic_macro_play_user(int8_t direction) {
 #ifdef AUDIO_ENABLE
-  PLAY_SONG(play_song);
+    PLAY_SONG(play_song);
 #endif
 }
 
