@@ -47,6 +47,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef AUDIO_ENABLE
     float plover_song[][2]     = SONG(PLOVER_SOUND);
     float plover_gb_song[][2]  = SONG(PLOVER_GOODBYE_SOUND);
+
+    float macro_start_song[][2] = SONG(STARTUP_SOUND);
+    float macro_end_song[][2] = SONG(GOODBYE_SOUND);
+    float macro_play_song[][2] = SONG(VIOLIN_SOUND);
 #endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -54,21 +58,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     uint16_t custom_keycode;
     switch (keycode) {
     case PLOVER: ;
+        #ifdef STENO_ENABLE
         if (!record->event.pressed) {
             #ifdef AUDIO_ENABLE
-                stop_all_notes();
                 PLAY_SONG(plover_song);
             #endif
             layer_on(_PLOVER);
         }
+        #endif
         return false;
     case EXT_PLV: ;
+        #ifdef STENO_ENABLE
         if (record->event.pressed) {
             #ifdef AUDIO_ENABLE
                 PLAY_SONG(plover_gb_song);
             #endif
             layer_off(_PLOVER);
         }
+        #endif
         return false;
     case QUOTE: ;
         custom_keycode = KC_DOUBLE_QUOTE;
@@ -134,27 +141,29 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
-#ifdef DYNAMIC_MACRO_ENABLE
+void eeconfig_init_user() {
+#ifdef STENO_ENABLE
+    steno_set_mode(STENO_MODE_GEMINI);
+#endif
+}
 
-float start_song[][2] = SONG(STARTUP_SOUND);
-float end_song[][2] = SONG(GOODBYE_SOUND);
-float play_song[][2] = SONG(VIOLIN_SOUND);
+#ifdef DYNAMIC_MACRO_ENABLE
 
 void dynamic_macro_record_start_user(void) {
 #ifdef AUDIO_ENABLE
-    PLAY_SONG(start_song);
+    PLAY_SONG(macro_start_song);
 #endif
 }
 
 void dynamic_macro_record_end_user(int8_t direction) {
 #ifdef AUDIO_ENABLE
-    PLAY_SONG(end_song);
+    PLAY_SONG(macro_end_song);
 #endif
 }
 
 void dynamic_macro_play_user(int8_t direction) {
 #ifdef AUDIO_ENABLE
-    PLAY_SONG(play_song);
+    PLAY_SONG(macro_play_song);
 #endif
 }
 
