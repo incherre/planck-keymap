@@ -45,12 +45,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 #ifdef AUDIO_ENABLE
-    float plover_song[][2]     = SONG(PLOVER_SOUND);
-    float plover_gb_song[][2]  = SONG(PLOVER_GOODBYE_SOUND);
+    float plover_song[][2]      = SONG(PLOVER_SOUND);
+    float plover_gb_song[][2]   = SONG(PLOVER_GOODBYE_SOUND);
 
     float macro_start_song[][2] = SONG(STARTUP_SOUND);
-    float macro_end_song[][2] = SONG(GOODBYE_SOUND);
-    float macro_play_song[][2] = SONG(VIOLIN_SOUND);
+    float macro_end_song[][2]   = SONG(GOODBYE_SOUND);
+    float macro_play_song[][2]  = SONG(VIOLIN_SOUND);
 #endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -143,7 +143,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 void eeconfig_init_user() {
 #ifdef STENO_ENABLE
-    steno_set_mode(STENO_MODE_GEMINI);
+    steno_set_mode(STENO_MODE_BOLT);
 #endif
 }
 
