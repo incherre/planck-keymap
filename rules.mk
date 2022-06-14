@@ -1,7 +1,7 @@
 # Nkey Rollover - if this doesn't work, see here: https://github.com/tmk/tmk_keyboard/wiki/FAQ#nkro-doesnt-work
 NKRO_ENABLE = yes
-# Plover stenotype
-STENO_ENABLE = yes
+# Random layer
+RAND_ENABLE = yes
 
 # Dynamic macros
 DYNAMIC_MACRO_ENABLE = yes

@@ -1,17 +1,19 @@
 #include QMK_KEYBOARD_H
 
+#include <stdlib.h>
+
 #include "keymap_steno.h"
 
 enum layers {
     _BASE,
     _RAISE,
-    _PLOVER
+    _RAND
 };
 
 enum custom_keycodes {
     QWERTY = SAFE_RANGE,
-    PLOVER,
-    EXT_PLV,
+    RAND,
+    EXIT_RAND,
     QUOTE,
     NINE,
     ZERO,
@@ -19,12 +21,12 @@ enum custom_keycodes {
 };
 #define RAISE MO(_RAISE)
 
-const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_BASE] = LAYOUT_ortho_4x12(
     KC_TAB,  KC_Q,    KC_W,    KC_E,            KC_R,    KC_T,   KC_Y,  KC_U,   KC_I,           KC_O,    KC_P,    KC_BSPC,
     KC_ESC,  KC_A,    KC_S,    KC_D,            KC_F,    KC_G,   KC_H,  KC_J,   KC_K,           KC_L,    KC_SCLN, QUOTE,
     KC_LEFT, KC_Z,    KC_X,    KC_C,            KC_V,    KC_B,   KC_N,  KC_M,   KC_COMM,        KC_DOT,  KC_SLSH, KC_RGHT,
-    DM_REC1, DM_PLY1, KC_LGUI, LALT_T(KC_BSPC), KC_LSFT, PLOVER, RAISE, KC_SPC, RCTL_T(KC_DEL), DM_REC2, DM_PLY2, DM_RSTP
+    DM_REC1, DM_PLY1, KC_LGUI, LALT_T(KC_BSPC), KC_LSFT, RAND, RAISE, KC_SPC, RCTL_T(KC_DEL), DM_REC2, DM_PLY2, DM_RSTP
 ),
 
 [_RAISE] = LAYOUT_ortho_4x12(
@@ -35,14 +37,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 
-[_PLOVER] = LAYOUT_planck_grid(
-    STN_N1,  STN_N2,  STN_N3,  STN_N4,  STN_N5,  STN_N6,  STN_N7,  STN_N8,  STN_N9,  STN_NA,  STN_NB,  STN_NC ,
-    STN_FN,  STN_S1,  STN_TL,  STN_PL,  STN_HL,  STN_ST1, STN_ST3, STN_FR,  STN_PR,  STN_LR,  STN_TR,  STN_DR ,
-    XXXXXXX, STN_S2,  STN_KL,  STN_WL,  STN_RL,  STN_ST2, STN_ST4, STN_RR,  STN_BR,  STN_GR,  STN_SR,  STN_ZR ,
-    EXT_PLV, XXXXXXX, XXXXXXX, STN_A,   STN_O,   XXXXXXX, XXXXXXX, STN_E,   STN_U,   STN_PWR, STN_RE1, STN_RE2
+[_RAND] = LAYOUT_ortho_4x12(
+    KC_TAB,  KC_Q,    KC_W,    KC_E,            KC_R,    KC_T,   KC_Y,  KC_U,   KC_I,           KC_O,    KC_P,    KC_BSPC,
+    KC_ESC,  KC_A,    KC_S,    KC_D,            KC_F,    KC_G,   KC_H,  KC_J,   KC_K,           KC_L,    KC_SCLN, QUOTE,
+    KC_LEFT, KC_Z,    KC_X,    KC_C,            KC_V,    KC_B,   KC_N,  KC_M,   KC_COMM,        KC_DOT,  KC_SLSH, KC_RGHT,
+    DM_REC1, DM_PLY1, KC_LGUI, LALT_T(KC_BSPC), KC_LSFT, EXIT_RAND, RAISE, KC_SPC, RCTL_T(KC_DEL), DM_REC2, DM_PLY2, DM_RSTP
 )
 
 };
+
+bool random_initialized = false;
+
+void shuffle_rand_layout() {
+    for (int i = 0; i < MATRIX_ROWS; i++) {
+        for (int j = 0; j < MATRIX_COLS; j++) {
+            int swap_i = rand() % MATRIX_ROWS;
+            int swap_j = rand() % MATRIX_COLS;
+
+            uint16_t swap_val = keymaps[_RAND][i][j];
+            keymaps[_RAND][i][j] = keymaps[_RAND][swap_i][swap_j];
+            keymaps[_RAND][swap_i][swap_j] = swap_val;
+        }
+    }
+}
 
 #ifdef AUDIO_ENABLE
     float plover_song[][2]      = SONG(PLOVER_SOUND);
@@ -57,23 +74,29 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     const uint8_t mod_state = get_mods();
     uint16_t custom_keycode;
     switch (keycode) {
-    case PLOVER: ;
-        #ifdef STENO_ENABLE
+    case RAND: ;
+        #ifdef RAND_ENABLE
+        if (!random_initialized) {
+            srand(timer_read());
+            random_initialized = true;
+        }
+
         if (!record->event.pressed) {
             #ifdef AUDIO_ENABLE
                 PLAY_SONG(plover_song);
             #endif
-            layer_on(_PLOVER);
+            shuffle_rand_layout();
+            layer_on(_RAND);
         }
         #endif
         return false;
-    case EXT_PLV: ;
-        #ifdef STENO_ENABLE
+    case EXIT_RAND: ;
+        #ifdef RAND_ENABLE
         if (record->event.pressed) {
             #ifdef AUDIO_ENABLE
                 PLAY_SONG(plover_gb_song);
             #endif
-            layer_off(_PLOVER);
+            layer_off(_RAND);
         }
         #endif
         return false;
