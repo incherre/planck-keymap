@@ -48,7 +48,7 @@ uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool random_initialized = false;
 
-void shuffle_rand_layout() {
+void shuffle_rand_layout(void) {
     for (int i = 0; i < MATRIX_ROWS; i++) {
         for (int j = 0; j < MATRIX_COLS; j++) {
             int swap_i = rand() % MATRIX_ROWS;
