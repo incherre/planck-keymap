@@ -7,6 +7,8 @@
 
 #define UNICODE_SELECTED_MODES UC_LNX
 
+#define RAND_ENABLE
+
 // https://beta.docs.qmk.fm/using-qmk/software-features/tap_hold#permissive-hold
 // #define PERMISSIVE_HOLD
 

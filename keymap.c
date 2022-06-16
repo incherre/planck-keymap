@@ -87,21 +87,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     RAND_0,  RAND_1,  RAND_2,  RAND_3,  RAND_4,  RAND_5,  RAND_6,  RAND_7,  RAND_8,  RAND_9,  RAND_10, RAND_11,
     RAND_12, RAND_13, RAND_14, RAND_15, RAND_16, RAND_17, RAND_18, RAND_19, RAND_20, RAND_21, RAND_22, RAND_23,
     RAND_24, RAND_25, RAND_26, RAND_27, RAND_28, RAND_29, RAND_30, RAND_31, RAND_32, RAND_33, RAND_34, RAND_35,
-    RAND_36, RAND_37, RAND_38, RAND_39, RAND_40, RAND_41, RAND,    RAND_42, RAND_43, RAND_44, RAND_45, RAND_46
+    RAND_36, RAND_37, RAND_38, RAND_39, RAND_40, RAND,    RAND_41, RAND_42, RAND_43, RAND_44, RAND_45, RAND_46
 )
 
 };
 
-const int RAND_LEN = 1 + RAND_46 - RAND_0;
+#define RAND_LEN_MACRO (1 + RAND_46 - RAND_0)
+static const int RAND_LEN = RAND_LEN_MACRO;
 
-uint16_t PROGMEM rand_keymap[RAND_LEN] = {
+static uint16_t PROGMEM rand_keymap[RAND_LEN_MACRO] = {
     KC_TAB,  KC_Q,    KC_W,    KC_E,            KC_R,    KC_T,   KC_Y,  KC_U,   KC_I,           KC_O,    KC_P,    KC_BSPC,
     KC_ESC,  KC_A,    KC_S,    KC_D,            KC_F,    KC_G,   KC_H,  KC_J,   KC_K,           KC_L,    KC_SCLN, QUOTE,
     KC_LEFT, KC_Z,    KC_X,    KC_C,            KC_V,    KC_B,   KC_N,  KC_M,   KC_COMM,        KC_DOT,  KC_SLSH, KC_RGHT,
     DM_REC1, DM_PLY1, KC_LGUI, LALT_T(KC_BSPC), KC_LSFT,         RAISE, KC_SPC, RCTL_T(KC_DEL), DM_REC2, DM_PLY2, DM_RSTP
-}
+};
 
-bool random_initialized = false;
+static bool random_initialized = false;
 
 void shuffle_rand_layout(void) {
     for (int i = 0; i < RAND_LEN; i++) {
